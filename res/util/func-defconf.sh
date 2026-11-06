@@ -114,6 +114,10 @@ microg_cleanup() {
   fi;
 
   ui_print "Existing setup found (dirty flash, beta)";
+  ui_print " ";
+  ui_print "WARNING: Dirty flash support is UNTESTED on real devices.";
+  ui_print "Keep a backup. Use opt-nomigrate in mmg-conf.txt to skip it.";
+  ui_print " ";
   ui_print "These apps will be reset on first boot:";
   for app in $migrate_list; do
     ui_print " - $app";

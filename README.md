@@ -10,12 +10,16 @@
   [GitLab](https://gitlab.com/FriendlyNeighborhoodShane/MinMicroG)
 
 ### Changes in this fork (3.1.0-beta1, pre-release)
-- **Dirty flash support (beta).** Flashing over a ROM that already had GApps or
-  another microG installer now queues a first-boot migration instead of
-  wiping things in recovery: user-installed updates of Play Services and
-  friends are removed and their data is cleared through the package manager.
-  Other apps' permissions and your Google accounts are no longer reset. See
-  `INSTALL.md`.
+> **WARNING: 3.1.0-beta1 is UNTESTED on real devices.** Its dirty flash support
+> has only been tested in a simulated environment. Use 3.0.0 unless you want to
+> help test, and keep a full backup.
+
+- **Dirty flash support (beta, untested).** Flashing over a ROM that already
+  had GApps or another microG installer now queues a first-boot migration
+  instead of wiping things in recovery: user-installed updates of Play
+  Services and friends are removed and their data is cleared through the
+  package manager. Other apps' permissions and your Google accounts are no
+  longer reset. See `INSTALL.md`.
 - New `mmg-conf.txt` options: `opt-nomigrate` and `opt-wipeaccounts`.
 - Fixed the boot script granting microG's background location and SMS
   permissions with an app ID where Android expects a user number, which made
@@ -93,10 +97,11 @@ was dropped along with the Play Store.
 
 ### Uninstallation and notes
 Dirty flashing (flashing over a ROM that is already in use, or over GApps or
-another microG installer) has beta support since 3.1.0-beta1: see "Flashing
-over an existing setup" in `INSTALL.md`. A clean install is still the
-recommended and safest option, and you should keep a backup when dirty
-flashing. Updating MinMicroG over an older MinMicroG has always been fine.
+another microG installer) has beta support since 3.1.0-beta1, which is untested
+on real devices: see "Flashing over an existing setup" in `INSTALL.md`. A clean
+install is still the recommended and safest option, and you should keep a
+backup when dirty flashing. Updating MinMicroG over an older MinMicroG has
+always been fine.
 
 You can flash this zip either from your recovery (recommended) or through
 Magisk Manager.

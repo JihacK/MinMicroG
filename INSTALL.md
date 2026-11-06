@@ -36,10 +36,13 @@ Most of your self-check should be checked by now. If some permissions are missin
 see the troubleshooting section below.
 
 ##### Flashing over an existing setup (dirty flash, beta)
+> **WARNING: UNTESTED.** This feature has only been tested in a simulated
+> environment, never on a real device or recovery. It may not work, and in the
+> worst case you may need to wipe data. Make a full backup first, and prefer a
+> clean install if you can.
+
 Starting with 3.1.0-beta1, MinMicroG can be flashed over a ROM that is already
-in use, including one that had GApps or another microG installer. This is a
-beta feature; a clean install is still the safest option, and you should have a
-backup before trying it.
+in use, including one that had GApps or another microG installer.
 
 What happens:
  - Updating MinMicroG over an older MinMicroG is detected (`/data/.mmg`) and
