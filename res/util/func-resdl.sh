@@ -1,21 +1,5 @@
 # Functions for use by resdl updater
 
-# Extract maps jar from release zip
-unzipmaps() {
-
-  mapsfile="system/framework/com.google.android.maps";
-
-  [ -f "$resdldir/$mapsfile.zip" ] || return 0;
-
-  echo " ";
-  echo " - Unzipping maps JAR...";
-
-  rm -rf "$resdldir/$mapsfile.jar";
-  unzip -oq -j "$resdldir/$mapsfile.zip" "$mapsfile.jar" -d "$resdldir/$(dirname "$mapsfile")/";
-  rm -rf "$resdldir/$mapsfile.zip";
-
-}
-
 # Get update delta
 updatedelta() {
 

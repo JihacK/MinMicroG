@@ -9,7 +9,6 @@ stuff_download="
   /system/app/AuroraStore/AuroraStore.apk                           repo    fdroid/com.aurora.store
   /system/app/Droidify/Droidify.apk                                 github  Droid-ify/client                                app-release.apk
   /system/app/MicroGGSFProxy/MicroGGSFProxy.apk                     repo    microg/com.google.android.gsf
-  /system/framework/com.google.android.maps.zip                     github  microg/android_frameworks_mapsv1                .zip
   /system/priv-app/FakeStore/FakeStore.apk                          repo    microg/com.android.vending
   /system/priv-app/MicroGGMSCore/MicroGGMSCore.apk                  repo    microg/com.google.android.gms
 
@@ -53,7 +52,6 @@ pre_update_actions() {
 
 post_update_actions() {
 
-  unzipmaps;
   updatedelta;
   verifycerts;
   checkwhitelist;

@@ -27,10 +27,7 @@ stuff="
   /system/etc/default-permissions/microg-permissions.xml
   /system/etc/permissions/com.android.vending.xml
   /system/etc/permissions/com.google.android.gms.xml
-  /system/etc/permissions/com.google.android.maps.xml
   /system/etc/sysconfig/nogoolag.xml
-
-  /system/framework/com.google.android.maps.jar
 
   /system/priv-app/FakeStore/FakeStore.apk
   /system/priv-app/MicroGGMSCore/MicroGGMSCore.apk
@@ -72,11 +69,13 @@ stuff_old="
   /system/app/RadioCellsNLPBackend/RadioCellsNLPBackend.apk
   /system/etc/default-permissions/microg-permissions-unlp.xml
   /system/etc/permissions/com.aurora.services.xml
+  /system/etc/permissions/com.google.android.maps.xml
   /system/etc/permissions/com.google.android.media.effects.xml
   /system/etc/permissions/com.google.widevine.software.drm.xml
   /system/etc/permissions/gsync.xml
   /system/etc/permissions/org.fdroid.fdroid.privileged.xml
   /system/etc/sysconfig/nogoolag-unlp.xml
+  /system/framework/com.google.android.maps.jar
   /system/framework/com.google.android.media.effects.jar
   /system/framework/com.google.widevine.software.drm.jar
   /system/lib/libjni_keyboarddecoder.so
@@ -148,7 +147,6 @@ stuff_perm="
   /system/etc/default-permissions
   /system/etc/permissions
   /system/etc/sysconfig
-  /system/framework/com.google.android.maps.jar
   /system/priv-app/FakeStore
   /system/priv-app/MicroGGMSCore
 ";

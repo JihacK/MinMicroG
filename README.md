@@ -18,6 +18,9 @@ buildable and current:
 - AuroraServices removed, since current Aurora apps no longer need it. The
   `AuroraServices` addon is removed.
 - Aurora Droid replaced by [Droid-ify](https://github.com/Droid-ify/client).
+- Maps APIv1 removed. Google retired that API around 2013, so only apps over
+  a decade old use it. GmsCore still provides Maps API v2, which current apps
+  use.
 - Aurora Store is downloaded from the official F-Droid repo, because GitLab no
   longer serves release uploads anonymously. This is F-Droid's build, signed
   with F-Droid's key, so it cannot update over a GitLab-signed install.
@@ -27,8 +30,8 @@ buildable and current:
 - microG GmsCore privileged permission whitelist updated with `DUMP` and
   `INTERACT_ACROSS_USERS`, which current GmsCore requests. ROMs that enforce
   the whitelist need these to boot.
-- Packs installed over an older version remove the dropped Aurora Droid and
-  Play Store files.
+- Packs installed over an older version remove the dropped Aurora Droid,
+  Play Store and Maps APIv1 files.
 
 microG itself (GmsCore and the Companion) is not pinned: `update.sh` always
 fetches the latest release from the microG F-Droid repo.
@@ -58,7 +61,6 @@ everything on a ROM flash in a system installation.
 | Component \ Variant   | Standard | NoGoolag | Minimal |
 |-----------------------|----------|----------|---------|
 | MicroG                | x        | x        | x       |
-| Maps APIv1            | x        | x        | x       |
 | Fake Store            | x        | x        | x       |
 | Aurora Store          |          | x        |         |
 | Droid-ify             | x        | x        |         |
@@ -71,8 +73,7 @@ was dropped along with the Play Store.
 
 #### Package sources and credit
 - MicroG includes GMSCore and GSFProxy from MicroG FDroid repo
-- Maps APIv1 from microG's GitHub releases (android_frameworks_mapsv1)
-- Fake Store from MicroG FDroid repo
+- Fake Store (microG Companion) from MicroG FDroid repo
 - Aurora Store from the official F-Droid repo (F-Droid's own build)
 - Droid-ify from its GitHub releases
 - Google Sync adapters for KK-R from OpenGApps GitLab repo, and for S and up
