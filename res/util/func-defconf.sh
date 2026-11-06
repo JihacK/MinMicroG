@@ -10,6 +10,21 @@ user_conf() {
       break;
     }
   done;
+  # Words starting with "opt-" are install options, not package filters
+  mmg_options="";
+  filterlist="";
+  for word in $includelist; do
+    case "$word" in
+      opt-*)
+        log "Enabling option $word";
+        mmg_options="$mmg_options $word";
+      ;;
+      *)
+        filterlist="$filterlist $word";
+      ;;
+    esac;
+  done;
+  includelist="$filterlist";
   [ "$includelist" ] && {
     new_stuff="";
     new_stuff_arch="";
@@ -42,51 +57,83 @@ user_conf() {
 
 }
 
-# Cleanup stuff that might conflict
+# Check whether an "opt-" option was enabled in mmg-conf.txt
+mmg_option() {
+
+  case " $mmg_options " in
+    *" $1 "*) return 0; ;;
+  esac;
+  return 1;
+
+}
+
+# Prepare for microG, and queue a first-boot migration if a previous
+# GApps or microG setup left data behind (dirty flash, beta)
 microg_cleanup() {
 
-  if echo "$stuff" | grep -q "MicroG"; then
-    ui_print " ";
-    ui_print "Doing MicroG preparations...";
-    if [ "$bootmode" != "true" ]; then
-      # Kanged from NanoDroid
-      # Thanks Setialpha
-      cleanup_folders="BlankStore GmsCore GmsCore_update GmsCoreSetupPrebuilt GoogleServicesFramework GsfProxy Phonesky PlayStore PrebuiltGmsCorePi PrebuiltGmsCorePix PrebuiltGmsCore Vending";
-      cleanup_packages="com.android.vending com.google.android.feedback com.google.android.gms com.google.android.gsf com.google.android.gsf.login com.mgoogle.android.gms";
-      for app in $cleanup_folders; do
-        for file in /data/dalvik-cache/*/system"@priv-app@$app"[@\.]*@classes.* /data/dalvik-cache/*/system"@app@$app"[@\.]*@classes.*; do
-          [ -e "$file" ] && { log "PREPPER: Removing $file"; rm -rf "$file"; }
-        done;
+  echo "$stuff" | grep -q "MicroG" || return 0;
+
+  ui_print " ";
+  ui_print "Doing MicroG preparations...";
+
+  # Kanged from NanoDroid
+  # Thanks Setialpha
+  cleanup_folders="BlankStore GmsCore GmsCore_update GmsCoreSetupPrebuilt GoogleServicesFramework GsfProxy Phonesky PlayStore PrebuiltGmsCorePi PrebuiltGmsCorePix PrebuiltGmsCore Vending";
+  cleanup_packages="com.android.vending com.google.android.feedback com.google.android.gms com.google.android.gsf com.google.android.gsf.login com.mgoogle.android.gms";
+
+  # Stale compiled code of replaced system apps (only safe while not booted)
+  if [ "$bootmode" != "true" ]; then
+    for app in $cleanup_folders; do
+      for file in /data/dalvik-cache/*/system"@priv-app@$app"[@\.]*@classes.* /data/dalvik-cache/*/system"@app@$app"[@\.]*@classes.*; do
+        [ -e "$file" ] && { log "PREPPER: Removing $file"; rm -rf "$file"; }
       done;
-      if [ -f "$mark_file" ]; then
-        log "PREPPER: This is an update flash";
-      else
-        log "PREPPER: Doing the clean install treatment";
-        for app in $cleanup_packages; do
-          for file in "/data/data/$app" "/data/user/*/$app" "/data/user_de/*/$app" "/data/app/$app"-* "/mnt/asec/$app"-* "/data/media/0/Android/data/$app"; do
-            [ -e "$file" ] && { log "PREPPER: Removing $file"; rm -rf "$file"; }
-          done;
-        done;
-        for file in /data/system/users/*/runtime-permissions.xml; do
-          [ -e "$file" ] && { log "PREPPER: Removing $file"; rm -rf "$file"; }
-        done;
-        if [ -f /data/system/packages.list ]; then
-          for app in $cleanup_packages; do
-            if grep -q "$app" "/data/system/packages.list"; then
-              log "PREPPER: de-registering app: $app";
-              sed -i "s/.*${app}.*//g" /data/system/packages.list;
-            fi;
-          done;
-        fi;
-        if command -v "sqlite3" >/dev/null; then
-          find /data/system* -type f -name "accounts*db" 2>/dev/null | while read -r database; do
-            log "PREPPER: deleting Google Accounts from $database";
-            sqlite3 "$database" "DELETE FROM accounts WHERE type='com.google';";
-          done
-        else
-          log "PREPPER: sqlite3 not found";
-        fi;
-      fi;
+    done;
+  fi;
+
+  if [ -f "$mark_file" ]; then
+    log "PREPPER: This is an update flash";
+    return 0;
+  fi;
+
+  # Packages that still have data from a previous setup
+  migrate_list="";
+  for app in $cleanup_packages; do
+    for dir in "/data/data/$app" /data/user/*/"$app" /data/user_de/*/"$app"; do
+      [ -e "$dir" ] && { migrate_list="$migrate_list $app"; break; }
+    done;
+  done;
+
+  if [ -z "$migrate_list" ]; then
+    log "PREPPER: Clean install, nothing to migrate";
+    return 0;
+  fi;
+
+  if mmg_option opt-nomigrate; then
+    ui_print "Existing setup found, but migration disabled (opt-nomigrate)";
+    return 0;
+  fi;
+
+  ui_print "Existing setup found (dirty flash, beta)";
+  ui_print "These apps will be reset on first boot:";
+  for app in $migrate_list; do
+    ui_print " - $app";
+  done;
+  rm -f "$migrate_file";
+  for app in $migrate_list; do
+    echo "$app" >> "$migrate_file";
+  done;
+  log "PREPPER: Wrote migration list to $migrate_file";
+
+  if mmg_option opt-wipeaccounts; then
+    if [ "$bootmode" = "true" ]; then
+      ui_print "opt-wipeaccounts only works when flashing from recovery";
+    elif command -v "sqlite3" >/dev/null; then
+      find /data/system* -type f -name "accounts*db" 2>/dev/null | while read -r database; do
+        log "PREPPER: deleting Google Accounts from $database";
+        sqlite3 "$database" "DELETE FROM accounts WHERE type='com.google';";
+      done;
+    else
+      ui_print "opt-wipeaccounts: sqlite3 not found, accounts kept";
     fi;
   fi;
 

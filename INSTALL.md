@@ -35,6 +35,51 @@ installation and can be removed with it.
 Most of your self-check should be checked by now. If some permissions are missing,
 see the troubleshooting section below.
 
+##### Flashing over an existing setup (dirty flash, beta)
+Starting with 3.1.0-beta1, MinMicroG can be flashed over a ROM that is already
+in use, including one that had GApps or another microG installer. This is a
+beta feature; a clean install is still the safest option, and you should have a
+backup before trying it.
+
+What happens:
+ - Updating MinMicroG over an older MinMicroG is detected (`/data/.mmg`) and
+   leaves your data alone, as before.
+ - Otherwise the installer looks for data left by Play Services, the Play
+   Store, Google Services Framework and similar packages. If it finds any, it
+   lists them during the flash and queues them for the first boot. Nothing is
+   deleted in recovery.
+ - On the first boot, MinMicroG's boot script removes user-installed updates of
+   those packages (for example Play Services self-updates, which would
+   otherwise hide microG), clears their data for every user, and then grants
+   microG's permissions. The result is logged to `/data/.mmg-migrate.log`.
+
+Your other apps, their permissions and your Google accounts are not touched by
+default. Older versions reset the runtime permissions of every app and deleted
+Google accounts; this is no longer done.
+
+Limitations:
+ - Apps signed in with your Google account may need you to sign in again
+   through microG.
+ - For system installs, the boot script lives in `/system/etc/init.d`, which
+   only runs on ROMs with init.d support. If `/data/.mmg-migrate` still exists
+   after booting, run the script once yourself as root:
+   `su -c sh /system/etc/init.d/10-MinMicroG`.
+   Magisk and KernelSU installs always run it.
+
+##### Install options (`mmg-conf.txt`)
+You can control the install with a `mmg-conf.txt` file. The first one found is
+used, in this order: next to the installer, next to the zip, in
+`internal-storage/MinMicroG/`, or `/data/adb/mmg-conf.txt`. Separate words with
+spaces or new lines; `#` starts a comment.
+
+ - Plain words filter what gets installed: only files whose path contains one
+   of the words are installed (for example `MicroGGMSCore`).
+ - Words starting with `opt-` are options:
+   - `opt-nomigrate`: do not queue the first-boot migration described above.
+   - `opt-wipeaccounts`: also delete Google accounts from the accounts
+     database when migrating, like older versions did. Only works when
+     flashing from recovery, and only if the recovery has `sqlite3`.
+
 ### Prerequisites
 
 ##### [microG] Signature spoofing

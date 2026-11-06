@@ -1,8 +1,8 @@
 # Config
 
 variant="Minimal";
-ver="3.0.0";
-verc="3000";
+ver="3.1.0-beta1";
+verc="3091";
 date="6 november 2026";
 minsdk="21";
 
@@ -183,7 +183,7 @@ post_install_actions() {
 pre_uninstall_actions() {
 
   [ "$magisk" = "no" ] && stuff_uninstall="$stuff_uninstall $addond_file $init_file";
-  rm -f "$mark_file";
+  rm -f "$mark_file" "$migrate_file";
   return 0;
 
 }
@@ -195,5 +195,7 @@ post_uninstall_actions() {
 }
 
 mark_file="/data/.mmg";
+# Must match migrate_file in res/util/script-init.sh
+migrate_file="/data/.mmg-migrate";
 addond_file="/system/addon.d/10-$modname.sh";
 init_file="/system/etc/init.d/10-$modname";
