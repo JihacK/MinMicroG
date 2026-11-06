@@ -9,9 +9,9 @@
 * Upstream: [GitHub](https://github.com/FriendlyNeighborhoodShane/MinMicroG),
   [GitLab](https://gitlab.com/FriendlyNeighborhoodShane/MinMicroG)
 
-### Changes in this fork
-Upstream has not been updated since April 2024. This fork keeps the packs
-buildable and current:
+### Changes in this fork (3.0.0)
+Upstream has not been updated since April 2024 (2.12.0). This fork keeps the
+packs buildable and current:
 - Play Store removed. Its download source (Pixel Experience GitLab) is gone.
   The `MinimalPhonesky` variant and the `PlayStore` addon are removed, and
   every variant now ships the microG Companion (Fake Store) instead.
@@ -169,7 +169,11 @@ Any changes made to the code should ideally be tested with `test.sh`, which
 runs the `shellcheck` linter program on every script.
 
 Use `bump.sh` to automatically bump the `ver`, `verc` and `date` values across
-all defconf files.
+all defconf files. It takes the version, an integer version code (Magisk uses
+it to detect upgrades, so it must increase) and the date:
+```
+> ./bump.sh 3.0.0 3000 "6 november 2026"
+```
 
 ### Credits
  - Thanks to @osm0sis for the base magisk/recovery code and inspiration and
@@ -179,6 +183,7 @@ all defconf files.
  - Thanks to FDroid and the MicroG project for actively resisting monopoly and
    control so we can actually use our devices without fear.
  - Thanks to Whyorean for his amazing works in the form of the Aurora Apps.
+ - Thanks to the Droid-ify developers for a modern F-Droid client.
  - Thanks to my friends over at NoGoolag for their help and patience over
    however long it took me to learn to do shit without "rm -rf /"-ing devices.
 
