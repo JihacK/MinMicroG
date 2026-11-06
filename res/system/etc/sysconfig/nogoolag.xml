@@ -24,8 +24,8 @@
 
     <!-- Ensure app store applications has internet access to manage updates. -->
     <allow-in-power-save-except-idle package="com.android.vending" />
-    <allow-in-power-save-except-idle package="com.aurora.adroid" />
     <allow-in-power-save-except-idle package="com.aurora.store" />
+    <allow-in-power-save-except-idle package="com.looker.droidify" />
 
     <!-- microG components -->
     <app-link package="com.google.android.gms" />

@@ -18,7 +18,7 @@ minMagisk=1900
 ";
 
 stuff="
-  /system/app/AuroraDroid/AuroraDroid.apk
+  /system/app/Droidify/Droidify.apk
   /system/app/MicroGGSFProxy/MicroGGSFProxy.apk
 
   /system/bin/npem
@@ -31,8 +31,8 @@ stuff="
 
   /system/framework/com.google.android.maps.jar
 
+  /system/priv-app/FakeStore/FakeStore.apk
   /system/priv-app/MicroGGMSCore/MicroGGMSCore.apk
-  /system/priv-app/Phonesky/Phonesky.apk
 ";
 
 stuff_arch="
@@ -57,12 +57,12 @@ stuff_util="
 
 stuff_other="
   /system/app/AuroraStore/AuroraStore.apk
-  /system/priv-app/FakeStore/FakeStore.apk
 ";
 
 stuff_old="
   /system/addon.d/01-nogoolag.sh
   /system/app/AppleNLPBackend/AppleNLPBackend.apk
+  /system/app/AuroraDroid/AuroraDroid.apk
   /system/app/DejaVuNLPBackend/DejaVuNLPBackend.apk
   /system/app/FDroid/FDroid.apk
   /system/app/LocalGSMNLPBackend/LocalGSMNLPBackend.apk
@@ -96,6 +96,7 @@ stuff_old="
   /system/priv-app/MozillaUnifiedNLPBackend/MozillaUnifiedNLPBackend.apk
   /system/priv-app/NominatimNLPBackend/NominatimNLPBackend.apk
   /system/priv-app/PatchPhonesky/PatchPhonesky.apk
+  /system/priv-app/Phonesky/Phonesky.apk
 ";
 
 stuff_uninstall="$stuff $stuff_arch $stuff_sdk $stuff_arch_sdk $stuff_other $stuff_old";
@@ -140,15 +141,15 @@ stuff_debloat="
 ";
 
 stuff_perm="
-  /system/app/AuroraDroid
+  /system/app/Droidify
   /system/app/MicroGGSFProxy
   /system/bin/npem
   /system/etc/default-permissions
   /system/etc/permissions
   /system/etc/sysconfig
   /system/framework/com.google.android.maps.jar
+  /system/priv-app/FakeStore
   /system/priv-app/MicroGGMSCore
-  /system/priv-app/Phonesky
   /system/app/GoogleCalendarSyncAdapter
   /system/app/GoogleContactsSyncAdapter
   /system/priv-app/GoogleBackupTransport

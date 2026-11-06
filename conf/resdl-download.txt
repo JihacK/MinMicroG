@@ -1,21 +1,26 @@
 # Config file for update.sh
 
 stuff_repo="
+  fdroid https://f-droid.org/repo
   microg https://microg.org/fdroid/repo
 ";
 
 stuff_download="
-  /system/app/AuroraDroid/AuroraDroid.apk                           gitlab  AuroraOSS/auroradroid                           .apk
-  /system/app/AuroraStore/AuroraStore.apk                           gitlab  AuroraOSS/AuroraStore                           .apk
+  /system/app/AuroraStore/AuroraStore.apk                           repo    fdroid/com.aurora.store
+  /system/app/Droidify/Droidify.apk                                 github  Droid-ify/client                                app-release.apk
   /system/app/MicroGGSFProxy/MicroGGSFProxy.apk                     repo    microg/com.google.android.gsf
   /system/framework/com.google.android.maps.zip                     github  microg/android_frameworks_mapsv1                .zip
-  /system/priv-app/AuroraServices/AuroraServices.apk                gitlab  AuroraOSS/AuroraServices                        .apk
   /system/priv-app/FakeStore/FakeStore.apk                          repo    microg/com.android.vending
   /system/priv-app/MicroGGMSCore/MicroGGMSCore.apk                  repo    microg/com.google.android.gms
 
   /system/app/GoogleCalendarSyncAdapter/-19-21-22-23-24-25-26-27-/GoogleCalendarSyncAdapter.apk direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.calendar/21/nodpi/2016267990.apk
   /system/app/GoogleCalendarSyncAdapter/-28-29-30-/GoogleCalendarSyncAdapter.apk                direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.calendar/21/nodpi/2016267990.apk
-  /system/app/GoogleCalendarSyncAdapter/-31-32-33-/GoogleCalendarSyncAdapter.apk                direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/sigma/common/proprietary/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
+  /system/app/GoogleCalendarSyncAdapter/-31-32-/GoogleCalendarSyncAdapter.apk                   direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/sigma/common/proprietary/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
+  /system/app/GoogleCalendarSyncAdapter/-33-/GoogleCalendarSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/tau/common/proprietary/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
+  /system/app/GoogleCalendarSyncAdapter/-34-/GoogleCalendarSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/upsilon/common/proprietary/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
+  /system/app/GoogleCalendarSyncAdapter/-35-/GoogleCalendarSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/vic/common/proprietary/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
+  /system/app/GoogleCalendarSyncAdapter/-36-/GoogleCalendarSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/baklava/common/proprietary/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
+  /system/app/GoogleCalendarSyncAdapter/-37-/GoogleCalendarSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/cinnamonbun/common/proprietary/product/app/GoogleCalendarSyncAdapter/GoogleCalendarSyncAdapter.apk
   /system/app/GoogleContactsSyncAdapter/-19-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.contacts/19/nodpi/19.apk
   /system/app/GoogleContactsSyncAdapter/-21-22-/GoogleContactsSyncAdapter.apk                   direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.contacts/21/nodpi/21.apk
   /system/app/GoogleContactsSyncAdapter/-23-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.contacts/23/nodpi/23.apk
@@ -24,14 +29,18 @@ stuff_download="
   /system/app/GoogleContactsSyncAdapter/-28-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.contacts/28/nodpi/28.apk
   /system/app/GoogleContactsSyncAdapter/-29-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.contacts/29/nodpi/29.apk
   /system/app/GoogleContactsSyncAdapter/-30-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.opengapps.org/opengapps/all/raw/master/app/com.google.android.syncadapters.contacts/30/nodpi/30.apk
-  /system/app/GoogleContactsSyncAdapter/-31-32-33-/GoogleContactsSyncAdapter.apk                direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/sigma/common/proprietary/product/app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
+  /system/app/GoogleContactsSyncAdapter/-31-32-/GoogleContactsSyncAdapter.apk                   direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/sigma/common/proprietary/product/app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
+  /system/app/GoogleContactsSyncAdapter/-33-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/tau/common/proprietary/product/app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
+  /system/app/GoogleContactsSyncAdapter/-34-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/upsilon/common/proprietary/product/app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
+  /system/app/GoogleContactsSyncAdapter/-35-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/vic/common/proprietary/product/app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
+  /system/app/GoogleContactsSyncAdapter/-36-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/baklava/common/proprietary/product/app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
+  /system/app/GoogleContactsSyncAdapter/-37-/GoogleContactsSyncAdapter.apk                      direct  https://gitlab.com/MindTheGapps/vendor_gapps/raw/cinnamonbun/common/proprietary/product/app/GoogleContactsSyncAdapter/GoogleContactsSyncAdapter.apk
   /system/priv-app/GoogleBackupTransport/-19-/GoogleBackupTransport.apk                         direct  https://gitlab.opengapps.org/opengapps/all/raw/master/priv-app/com.google.android.backuptransport/19/nodpi/19.apk
   /system/priv-app/GoogleBackupTransport/-21-22-/GoogleBackupTransport.apk                      direct  https://gitlab.opengapps.org/opengapps/all/raw/master/priv-app/com.google.android.backuptransport/21/nodpi/21.apk
   /system/priv-app/GoogleBackupTransport/-23-/GoogleBackupTransport.apk                         direct  https://gitlab.opengapps.org/opengapps/all/raw/master/priv-app/com.google.android.backuptransport/23/nodpi/23.apk
   /system/priv-app/GoogleBackupTransport/-24-25-/GoogleBackupTransport.apk                      direct  https://gitlab.opengapps.org/opengapps/all/raw/master/priv-app/com.google.android.backuptransport/24/nodpi/24.apk
   /system/priv-app/GoogleBackupTransport/-26-27-/GoogleBackupTransport.apk                      direct  https://gitlab.opengapps.org/opengapps/all/raw/master/priv-app/com.google.android.backuptransport/26/nodpi/26.apk
   /system/priv-app/GoogleBackupTransport/-28-29-30-/GoogleBackupTransport.apk                   direct  https://gitlab.opengapps.org/opengapps/all/raw/master/priv-app/com.google.android.backuptransport/28/nodpi/28.apk
-  /system/priv-app/Phonesky/Phonesky.apk                                                        direct  https://gitlab.pixelexperience.org/android/vendor_gms/raw/HEAD/common/proprietary/product/priv-app/Phonesky/Phonesky.apk
 ";
 
 pre_update_actions() {

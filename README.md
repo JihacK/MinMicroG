@@ -5,8 +5,33 @@
 **Licensed under the GNU GPL v3**
 
 ### Repositories
-* [GitHub](https://github.com/FriendlyNeighborhoodShane/MinMicroG)
-* [GitLab](https://gitlab.com/FriendlyNeighborhoodShane/MinMicroG)
+* [GitHub (this fork)](https://github.com/JihacK/MinMicroG)
+* Upstream: [GitHub](https://github.com/FriendlyNeighborhoodShane/MinMicroG),
+  [GitLab](https://gitlab.com/FriendlyNeighborhoodShane/MinMicroG)
+
+### Changes in this fork
+Upstream has not been updated since April 2024. This fork keeps the packs
+buildable and current:
+- Play Store removed. Its download source (Pixel Experience GitLab) is gone.
+  The `MinimalPhonesky` variant and the `PlayStore` addon are removed, and
+  every variant now ships the microG Companion (Fake Store) instead.
+- AuroraServices removed, since current Aurora apps no longer need it. The
+  `AuroraServices` addon is removed.
+- Aurora Droid replaced by [Droid-ify](https://github.com/Droid-ify/client).
+- Aurora Store is downloaded from the official F-Droid repo, because GitLab no
+  longer serves release uploads anonymously. This is F-Droid's build, signed
+  with F-Droid's key, so it cannot update over a GitLab-signed install.
+- Google Sync adapters now cover Android 12 through 17 (SDK 31-37), each from
+  the matching MindTheGapps branch. Previously SDK 33 got the Android 12.1
+  build and SDK 34 and up got nothing.
+- microG GmsCore privileged permission whitelist updated with `DUMP` and
+  `INTERACT_ACROSS_USERS`, which current GmsCore requests. ROMs that enforce
+  the whitelist need these to boot.
+- Packs installed over an older version remove the dropped Aurora Droid and
+  Play Store files.
+
+microG itself (GmsCore and the Companion) is not pinned: `update.sh` always
+fetches the latest release from the microG F-Droid repo.
 
 ### microG communities
 * [/r/microG](https://reddit.com/r/microG) on Reddit
@@ -23,35 +48,35 @@ device, just rename it and flash it again.
 ### Variants
 The `MinMicroG` packages are intended as various base configuration for microG,
 they are all mutually exclusive with each other and you can only choose one.
-While the `MinAddon` packages act as independent additions on top, you can have
-as many as you wish over a base package, or even without a base package.
+The build system also supports `MinAddon` packages that act as independent
+additions on top, but there are none at the moment.
 
 All of these include required permissions and an addon.d file to backup/restore
 everything on a ROM flash in a system installation.
 
 #### Table of contents of different MinMicroG variants
-| Component \ Variant   | Standard | NoGoolag | Minimal | MinimalPhonesky |
-|-----------------------|----------|----------|---------|-----------------|
-| MicroG                | x        | x        | x       | x               |
-| Maps APIv1            | x        | x        | x       | x               |
-| Fake Store            |          | x        | x       |                 |
-| Google Play Store     | x        |          |         | x               |
-| Aurora Store          |          | x        |         |                 |
-| Aurora Droid          | x        | x        |         |                 |
-| Google Sync adapters  | x        |          |         |                 |
+| Component \ Variant   | Standard | NoGoolag | Minimal |
+|-----------------------|----------|----------|---------|
+| MicroG                | x        | x        | x       |
+| Maps APIv1            | x        | x        | x       |
+| Fake Store            | x        | x        | x       |
+| Aurora Store          |          | x        |         |
+| Droid-ify             | x        | x        |         |
+| Google Sync adapters  | x        |          |         |
 
 #### List of MinAddon variants
-They just consist of singular components, just what they say on their label.
-- AuroraServices
-- PlayStore
+There are currently no MinAddon packages. The former AuroraServices addon was
+dropped because current Aurora apps no longer need it, and the PlayStore addon
+was dropped along with the Play Store.
 
 #### Package sources and credit
 - MicroG includes GMSCore and GSFProxy from MicroG FDroid repo
-- Maps APIv1 from MicroG FDroid repo
-- Google Play Store modded from the Pixel Experience Gitlab
+- Maps APIv1 from microG's GitHub releases (android_frameworks_mapsv1)
 - Fake Store from MicroG FDroid repo
-- Aurora Store and Aurora Droid from Whyorean's GitLab
-- Google Sync adapters for KK-R from OpenGApps GitLab repo, and for S-T from MindTheGApps GitLab repo
+- Aurora Store from the official F-Droid repo (F-Droid's own build)
+- Droid-ify from its GitHub releases
+- Google Sync adapters for KK-R from OpenGApps GitLab repo, and for S and up
+  from MindTheGApps GitLab repo
 
 ### Uninstallation and notes
 Dirty flashing not recommended. you'll mess up all your permissions and may

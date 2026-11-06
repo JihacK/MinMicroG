@@ -83,8 +83,10 @@ a correct AuroraServices.apk where we wanted.
 
 For a new pack, we make a new defconf file. Note that the name in the defconf
 file is only used to execute the build command, the name of the zip in releases
-will be using the `variant` variable in the defconf. Open the
-`defconf-aurora.txt` file and see what the final result is.
+will be using the `variant` variable in the defconf. This walkthrough's pack
+has since been removed from the repo (current Aurora apps no longer need
+AuroraServices), but you can still see the final result with
+`git show c28587c:conf/defconf-aurora.txt`.
 
 NOTE: I only reccomend doing this if you're familiar with shell scripts. DO NOT
 execute anything directly in the file; it is executed at both build time and
